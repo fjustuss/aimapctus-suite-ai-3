@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Aimapctus Suite AI</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <button type="button" class="btn-back-home" onclick="window.location.href='./index.html'" title="Voltar à página inicial">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Voltar ao Início</span>
+                </button>
+                <a href="./index.html" class="auth-logo" title="Voltar à página inicial">
+                    <img src="./assets/logo.svg" alt="Aimapctus Suite AI" class="logo">
+                    <span class="logo-text">Aimapctus Suite AI</span>
+                </a>
+                <p class="auth-subtitle">Domine TikTok, Kwai e YouTube com IA</p>
+            </div>
+
+            <!-- Login Form -->
+            <div class="auth-form-container" id="login-form">
+                <h2 class="auth-title">Fazer Login</h2>
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Senha</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Entrar
+                    </button>
+                </form>
+                <div class="auth-links">
+                    <a href="#" id="forgot-password-link">Esqueci minha senha</a>
+                    <p>Não tem uma conta? <a href="./onboarding.html" class="link">Criar conta grátis</a></p>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-form-container" id="register-form" style="display: none;">
+                <h2 class="auth-title">Criar Conta Grátis</h2>
+                <p class="auth-description">Comece seu teste grátis de 7 dias</p>
+                <form class="auth-form" id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Nome Completo</label>
+                        <input type="text" id="registerName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Senha</label>
+                        <input type="password" id="registerPassword" name="password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="planSelect">Escolha seu plano</label>
+                        <select id="planSelect" name="plan" required>
+                            <option value="criador">Criador - R$ 29,90/mês (7 dias grátis)</option>
+                            <option value="influencer">Influencer Pro - R$ 49,90/mês</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-rocket"></i>
+                        Começar Teste Grátis
+                    </button>
+                </form>
+                <div class="auth-links">
+                    <p>Já tem uma conta? <a href="#" id="show-login">Fazer login</a></p>
+                </div>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div class="auth-form-container" id="forgot-password-form" style="display: none;">
+                <h2 class="auth-title">Recuperar Senha</h2>
+                <p class="auth-description">Digite seu email para receber instruções</p>
+                <form class="auth-form" id="forgotPasswordForm">
+                    <div class="form-group">
+                        <label for="forgotEmail">Email</label>
+                        <input type="email" id="forgotEmail" name="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Instruções
+                    </button>
+                </form>
+                <div class="auth-links">
+                    <a href="#" id="back-to-login">Voltar ao login</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-features">
+            <h3>O que você terá acesso:</h3>
+            <ul class="feature-list">
+                <li><i class="fas fa-check"></i> Gerador de vídeos com IA</li>
+                <li><i class="fas fa-check"></i> Thumbnails irresistíveis</li>
+                <li><i class="fas fa-check"></i> Hashtags trending</li>
+                <li><i class="fas fa-check"></i> Roteiros virais</li>
+                <li><i class="fas fa-check"></i> Analytics completo</li>
+                <li><i class="fas fa-check"></i> Suporte prioritário</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="./js/config/config.js"></script>
+    <script src="./js/config/supabase.js"></script>
+    <script src="./js/auth.js"></script>
+</body>
+</html>

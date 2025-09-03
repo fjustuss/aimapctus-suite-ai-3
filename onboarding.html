@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Aimapctus Suite AI</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="onboarding-page">
+    <div class="onboarding-container">
+        <!-- Progress Bar -->
+        <div class="progress-header">
+            <div class="header-navigation">
+                <button type="button" class="btn-back-home" onclick="window.location.href='./index.html'" title="Voltar à página inicial">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Voltar ao Início</span>
+                </button>
+                <a href="./index.html" class="onboarding-logo" title="Voltar à página inicial">
+                    <img src="./assets/logo.svg" alt="Aimapctus Suite AI" class="logo">
+                    <span class="logo-text">Aimapctus Suite AI</span>
+                </a>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Conta</span>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Plataformas</span>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Plano</span>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">Finalizar</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Account Creation -->
+        <div class="onboarding-step active" id="step-1">
+            <div class="step-content">
+                <div class="step-header">
+                    <div class="step-icon-wrapper">
+                        <div class="step-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                    <h2 class="step-title">Vamos começar! 🚀</h2>
+                    <p class="step-description">Crie sua conta para dominar TikTok, Kwai e YouTube com IA</p>
+                    <div class="step-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Configuração em 2 minutos</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>7 dias grátis para testar</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Cancele quando quiser</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="onboarding-form" id="account-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Nome</label>
+                            <input type="text" id="firstName" name="firstName" required placeholder="Ex: João">
+                            <span class="error-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Sobrenome</label>
+                            <input type="text" id="lastName" name="lastName" required placeholder="Ex: Silva">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" required minlength="6" placeholder="Mínimo 6 caracteres">
+                            <button type="button" class="password-toggle" id="password-toggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar"></div>
+                            <span class="strength-text">Força da senha</span>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Digite a senha novamente">
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="termsAccept" name="termsAccept" required>
+                            <span class="checkmark"></span>
+                            Aceito os <a href="#" class="link">Termos de Uso</a> e <a href="#" class="link">Política de Privacidade</a>
+                        </label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <span class="checkmark"></span>
+                            Quero receber dicas e novidades sobre criação de conteúdo viral
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <span>Continuar</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="step-footer">
+                    <p>Já tem uma conta? <a href="./auth.html" class="link">Fazer login</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Platform Selection -->
+        <div class="onboarding-step" id="step-2">
+            <div class="step-content">
+                <div class="step-header">
+                    <div class="step-icon-wrapper">
+                        <div class="step-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                    <h2 class="step-title">Quais plataformas você usa? 📱</h2>
+                    <p class="step-description">Selecione onde você cria conteúdo para personalizarmos sua experiência</p>
+                    <div class="platforms-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50k+</span>
+                            <span class="stat-label">criadores ativos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500M+</span>
+                            <span class="stat-label">views geradas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">10x</span>
+                            <span class="stat-label">mais engagement</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="onboarding-form" id="platforms-form">
+                    <div class="platforms-grid">
+                        <div class="platform-card" data-platform="tiktok">
+                            <div class="platform-icon">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <h3 class="platform-name">TikTok</h3>
+                            <p class="platform-description">Vídeos curtos e virais</p>
+                            <div class="platform-stats">
+                                <span>+1B usuários</span>
+                            </div>
+                            <div class="platform-checkbox">
+                                <input type="checkbox" id="platform-tiktok" name="platforms" value="tiktok">
+                                <span class="checkmark"></span>
+                            </div>
+                        </div>
+
+                        <div class="platform-card" data-platform="kwai">
+                            <div class="platform-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <h3 class="platform-name">Kwai</h3>
+                            <p class="platform-description">Entretenimento e descoberta</p>
+                            <div class="platform-stats">
+                                <span>+170M usuários</span>
+                            </div>
+                            <div class="platform-checkbox">
+                                <input type="checkbox" id="platform-kwai" name="platforms" value="kwai">
+                                <span class="checkmark"></span>
+                            </div>
+                        </div>
+
+                        <div class="platform-card" data-platform="youtube">
+                            <div class="platform-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <h3 class="platform-name">YouTube</h3>
+                            <p class="platform-description">Vídeos longos e Shorts</p>
+                            <div class="platform-stats">
+                                <span>+2B usuários</span>
+                            </div>
+                            <div class="platform-checkbox">
+                                <input type="checkbox" id="platform-youtube" name="platforms" value="youtube">
+                                <span class="checkmark"></span>
+                            </div>
+                        </div>
+
+                        <div class="platform-card" data-platform="instagram">
+                            <div class="platform-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <h3 class="platform-name">Instagram</h3>
+                            <p class="platform-description">Reels e Stories</p>
+                            <div class="platform-stats">
+                                <span>+2B usuários</span>
+                            </div>
+                            <div class="platform-checkbox">
+                                <input type="checkbox" id="platform-instagram" name="platforms" value="instagram">
+                                <span class="checkmark"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-niche">
+                        <h3>Qual é o seu nicho principal?</h3>
+                        <div class="niche-options">
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="danca">
+                                <span class="option-content">
+                                    <i class="fas fa-music"></i>
+                                    <span>Dança & Música</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="comedia">
+                                <span class="option-content">
+                                    <i class="fas fa-laugh"></i>
+                                    <span>Comédia</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="educacao">
+                                <span class="option-content">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Educação</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="lifestyle">
+                                <span class="option-content">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Lifestyle</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="games">
+                                <span class="option-content">
+                                    <i class="fas fa-gamepad"></i>
+                                    <span>Games</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="culinaria">
+                                <span class="option-content">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Culinária</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="fitness">
+                                <span class="option-content">
+                                    <i class="fas fa-dumbbell"></i>
+                                    <span>Fitness</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="beleza">
+                                <span class="option-content">
+                                    <i class="fas fa-sparkles"></i>
+                                    <span>Beleza</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="negocios">
+                                <span class="option-content">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Negócios</span>
+                                </span>
+                            </label>
+                            <label class="niche-option">
+                                <input type="radio" name="niche" value="outro">
+                                <span class="option-content">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Outro</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="back-step-1">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Voltar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span>Continuar</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Step 3: Plan Selection -->
+        <div class="onboarding-step" id="step-3">
+            <div class="step-content">
+                <div class="step-header">
+                    <div class="step-icon-wrapper">
+                        <div class="step-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                    </div>
+                    <h2 class="step-title">Escolha seu plano 💎</h2>
+                    <p class="step-description">Comece com 7 dias grátis e veja o poder da IA para criadores</p>
+                    <div class="pricing-guarantee">
+                        <div class="guarantee-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Garantia de 30 dias ou seu dinheiro de volta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="onboarding-form" id="plan-form">
+                    <div class="plans-comparison">
+                        <div class="plan-option" data-plan="criador">
+                            <div class="plan-header">
+                                <h3 class="plan-name">Criador</h3>
+                                <div class="plan-price">
+                                    <span class="currency">R$</span>
+                                    <span class="amount">29,90</span>
+                                    <span class="period">/mês</span>
+                                </div>
+                                <div class="trial-badge">7 dias grátis</div>
+                            </div>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> Gerador de vídeos com IA</li>
+                                <li><i class="fas fa-check"></i> TikTok + Kwai + YouTube</li>
+                                <li><i class="fas fa-check"></i> Thumbnails ilimitadas</li>
+                                <li><i class="fas fa-check"></i> Hashtags trending</li>
+                                <li><i class="fas fa-check"></i> Roteiros virais</li>
+                                <li><i class="fas fa-check"></i> Suporte por email</li>
+                            </ul>
+                            <div class="plan-selection">
+                                <input type="radio" id="plan-criador" name="plan" value="criador">
+                                <label for="plan-criador" class="plan-select-btn">
+                                    <span>Escolher Criador</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="plan-option featured" data-plan="influencer">
+                            <div class="popular-badge">Mais Popular</div>
+                            <div class="plan-header">
+                                <h3 class="plan-name">Influencer Pro</h3>
+                                <div class="plan-price">
+                                    <span class="currency">R$</span>
+                                    <span class="amount">49,90</span>
+                                    <span class="period">/mês</span>
+                                </div>
+                                <div class="trial-badge">Teste agora</div>
+                            </div>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> <strong>Tudo do Criador +</strong></li>
+                                <li><i class="fas fa-check"></i> IA avançada de vídeos</li>
+                                <li><i class="fas fa-check"></i> Editor avançado</li>
+                                <li><i class="fas fa-check"></i> Agendamento inteligente</li>
+                                <li><i class="fas fa-check"></i> Analytics completo</li>
+                                <li><i class="fas fa-check"></i> Tendências em tempo real</li>
+                                <li><i class="fas fa-check"></i> Suporte prioritário</li>
+                                <li><i class="fas fa-check"></i> A/B testing</li>
+                            </ul>
+                            <div class="plan-selection">
+                                <input type="radio" id="plan-influencer" name="plan" value="influencer" checked>
+                                <label for="plan-influencer" class="plan-select-btn">
+                                    <span>Escolher Influencer Pro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="plan-guarantee">
+                        <div class="guarantee-content">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Garantia de 30 dias</h4>
+                                <p>Se não estiver satisfeito, devolvemos 100% do seu dinheiro</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="back-step-2">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Voltar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span>Continuar</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Step 4: Complete Setup -->
+        <div class="onboarding-step" id="step-4">
+            <div class="step-content">
+                <div class="step-header">
+                    <h2 class="step-title">Quase lá! 🎉</h2>
+                    <p class="step-description">Confirme seus dados e finalize seu cadastro</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Resumo da sua conta</h3>
+                    <div class="summary-item">
+                        <span class="label">Nome:</span>
+                        <span class="value" id="summary-name">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Email:</span>
+                        <span class="value" id="summary-email">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Plataformas:</span>
+                        <span class="value" id="summary-platforms">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Nicho:</span>
+                        <span class="value" id="summary-niche">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Plano:</span>
+                        <span class="value" id="summary-plan">-</span>
+                    </div>
+                </div>
+
+                <form class="onboarding-form" id="complete-form">
+                    <div class="welcome-benefits">
+                        <h3>🚀 O que você ganha agora:</h3>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check"></i> Acesso imediato a todas as ferramentas de IA</li>
+                            <li><i class="fas fa-check"></i> Dashboard personalizado para criadores</li>
+                            <li><i class="fas fa-check"></i> Templates otimizados para seu nicho</li>
+                            <li><i class="fas fa-check"></i> Suporte especializado em criação de conteúdo</li>
+                            <li><i class="fas fa-check"></i> Comunidade exclusiva de criadores</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="back-step-3">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Voltar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-rocket"></i>
+                            <span>Criar Minha Conta</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Success Step -->
+        <div class="onboarding-step" id="success-step">
+            <div class="step-content text-center">
+                <div class="success-animation">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                
+                <h2 class="step-title">Bem-vindo ao Aimapctus! 🎉</h2>
+                <p class="step-description">
+                    Sua conta foi criada com sucesso! Agora você tem acesso a todas as ferramentas de IA para criar conteúdo viral.
+                </p>
+
+                <div class="next-steps">
+                    <h3>Próximos passos:</h3>
+                    <div class="steps-list">
+                        <div class="next-step">
+                            <div class="step-icon">1</div>
+                            <div class="step-info">
+                                <h4>Conecte suas contas</h4>
+                                <p>Integre TikTok, Kwai e YouTube</p>
+                            </div>
+                        </div>
+                        <div class="next-step">
+                            <div class="step-icon">2</div>
+                            <div class="step-info">
+                                <h4>Crie seu primeiro vídeo</h4>
+                                <p>Use nossa IA para gerar conteúdo viral</p>
+                            </div>
+                        </div>
+                        <div class="next-step">
+                            <div class="step-icon">3</div>
+                            <div class="step-info">
+                                <h4>Acompanhe resultados</h4>
+                                <p>Veja analytics em tempo real</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-actions">
+                    <button class="btn btn-primary btn-large" id="go-to-dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Ir para Dashboard</span>
+                    </button>
+                    <button class="btn btn-secondary" id="watch-tutorial">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Ver Tutorial (2 min)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Confirmation Step -->
+        <div class="onboarding-step" id="email-confirmation-step">
+            <div class="step-content text-center">
+                <div class="email-icon-wrapper">
+                    <div class="email-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+                
+                <h2 class="step-title">Confirme seu email 📧</h2>
+                <p class="step-description">
+                    Enviamos um email de confirmação para <strong id="confirmation-email">seu@email.com</strong>. 
+                    <br>Clique no link do email para ativar sua conta e acessar todas as funcionalidades.
+                </p>
+
+                <div class="confirmation-benefits">
+                    <div class="benefit-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Segurança Total</h4>
+                        <p>Sistema de confirmação do Supabase protege sua conta contra acessos não autorizados</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-bell"></i>
+                        <h4>Notificações</h4>
+                        <p>Receba alertas sobre vídeos virais, trends e novidades da plataforma</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-gift"></i>
+                        <h4>Conteúdo Exclusivo</h4>
+                        <p>Templates premium, dicas de especialistas e conteúdo direto no seu email</p>
+                    </div>
+                </div>
+
+                <div class="confirmation-actions">
+                    <div class="email-status">
+                        <p class="help-text">Não recebeu o email?</p>
+                        <button class="btn btn-outline" id="resend-email">
+                            <i class="fas fa-redo"></i>
+                            <span>Reenviar Email de Confirmação</span>
+                        </button>
+                    </div>
+                    
+                    <div class="alternative-action">
+                        <p class="help-text">Ou continue e confirme depois:</p>
+                        <button class="btn btn-primary" id="continue-without-confirmation">
+                            <i class="fas fa-arrow-right"></i>
+                            <span>Ir para Dashboard (Não Confirmado)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="email-help">
+                    <details class="help-details">
+                        <summary>Não encontra o email?</summary>
+                        <div class="help-content">
+                            <ul>
+                                <li>📧 Verifique a pasta de spam/lixeira do seu email</li>
+                                <li>⏱️ O email pode levar até 5 minutos para chegar</li>
+                                <li>📝 Confirme se o endereço de email está correto</li>
+                                <li>🔒 O link de confirmação é seguro e vem do Supabase</li>
+                                <li>📞 Entre em contato conosco se o problema persistir</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/config/config.js"></script>
+    <script src="./js/config/supabase.js"></script>
+    <script src="./js/onboarding.js"></script>
+</body>
+</html>

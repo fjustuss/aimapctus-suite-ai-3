@@ -1,0 +1,111 @@
+[build]
+  # Diretório de publicação (raiz do projeto já contém os arquivos HTML)
+  publish = "."
+  
+  # Comando de build (não necessário para site estático)
+  command = "echo 'Site estático - sem build necessário'"
+
+[build.environment]
+  # Variáveis de ambiente para build
+  NODE_VERSION = "18"
+
+# Configurações de redirecionamento e roteamento
+[[redirects]]
+  # Redirecionar para index.html para SPA routing (se necessário)
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"], Country = ["US"]}
+  force = false
+
+[[redirects]]
+  # Redirect para HTTPS
+  from = "http://aimapctus-suite-ai.netlify.app/*"
+  to = "https://aimapctus-suite-ai.netlify.app/:splat"
+  status = 301
+  force = true
+
+# Headers de segurança
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Segurança básica
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # CSP básico
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co"
+    
+    # Cache para assets estáticos
+    Cache-Control = "public, max-age=31536000"
+
+# Headers específicos para HTML
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Headers específicos para CSS e JS
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+    
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Headers específicos para imagens
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+    
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+    
+[[headers]]
+  for = "*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Configurações para admin (proteção básica)
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/roteiros.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Funcionalidades do Netlify
+[functions]
+  # Diretório das funções Netlify (para futuras expansões)
+  directory = "netlify/functions"
+
+# Configurações de formulários (se necessário no futuro)
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = false
+  minify = true
+[build.processing.js]
+  bundle = false
+  minify = true
+[build.processing.html]
+  pretty_urls = true
+
+# Configurações de desenvolvimento local
+[dev]
+  command = "python -m http.server 8888"
+  port = 8888
+  publish = "."

@@ -1,0 +1,2706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Dashboard - Aimapctus Suite AI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="./assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Admin-specific styles */
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #f59e0b;
+            --accent-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f97316;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-light: #94a3b8;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-dark: #020617;
+            --bg-card: #334155;
+            --border-color: #475569;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --border-radius: 8px;
+            --border-radius-lg: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .admin-header {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .admin-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .admin-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .login-form {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            max-width: 400px;
+            margin: 0 auto 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            transition: var(--transition);
+            font-size: 14px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            line-height: 1;
+            white-space: nowrap;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .admin-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .action-card {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .action-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            border-radius: var(--border-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .action-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .action-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .btn-action {
+            width: auto;
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+
+        .recent-activity {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .activity-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+
+        .activity-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .activity-list {
+            padding: 0;
+        }
+
+        .activity-item {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: white;
+        }
+
+        .activity-icon.success {
+            background: var(--accent-color);
+        }
+
+        .activity-icon.warning {
+            background: var(--warning-color);
+        }
+
+        .activity-icon.info {
+            background: var(--primary-color);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .activity-time {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            padding: 12px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .back-to-main-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.125rem;
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+        }
+
+        .back-to-main-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .stat-trend {
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            margin-top: 4px;
+        }
+
+        .admin-section {
+            margin-top: 32px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* User Management Styles */
+        .users-table-container {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .table-controls {
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .filter-select {
+            padding: 10px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .users-table {
+            overflow-x: auto;
+        }
+
+        .users-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .users-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .users-table td {
+            color: var(--text-secondary);
+        }
+
+        .user-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-color);
+        }
+
+        .status-inactive {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger-color);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+        }
+
+        /* Settings Styles */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .settings-card {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .settings-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .setting-item {
+            margin-bottom: 20px;
+        }
+
+        .setting-item label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .setting-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .setting-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .settings-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        /* Reports Styles */
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .report-card {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .report-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .chart-placeholder {
+            display: flex;
+            align-items: end;
+            gap: 8px;
+            height: 100px;
+            margin-bottom: 12px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--primary-color);
+            border-radius: 2px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .chart-bar:hover {
+            opacity: 1;
+        }
+
+        .chart-label {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .revenue-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .revenue-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .revenue-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-usage {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .usage-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .usage-item span:first-child {
+            min-width: 100px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .usage-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .usage-fill {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .usage-item span:last-child {
+            min-width: 40px;
+            text-align: right;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 20px 16px;
+            }
+
+            .admin-header {
+                padding: 24px;
+            }
+
+            .admin-title {
+                font-size: 2rem;
+            }
+
+            .login-form {
+                padding: 24px;
+            }
+
+            .admin-stats,
+            .admin-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .activity-item {
+                padding: 16px;
+            }
+        }
+
+        /* Script Management Styles */
+        .script-management-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .script-section {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .script-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .script-section-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .prompt-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .category-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            padding: 0.5rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        .btn-edit {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn-delete {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .category-stat {
+            color: var(--text-light);
+        }
+
+        .category-stat strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .prompts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .prompt-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .prompt-card:hover {
+            border-color: var(--primary-color);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .prompt-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .prompt-category {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .prompt-content {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            color: var(--text-secondary);
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group-full {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .form-input,
+        .form-textarea,
+        .filter-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            transition: var(--transition);
+            font-size: 0.875rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: monospace;
+            line-height: 1.5;
+        }
+
+        .form-help {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .platform-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .platform-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .platform-tag input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .platform-tag label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .prompt-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .prompt-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .prompt-variables {
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .prompt-variables-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .variables-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .variable-tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            font-family: monospace;
+        }
+
+        /* Responsive Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .form-group-full {
+                grid-column: span 1;
+            }
+
+            .modal-header,
+            .modal-actions {
+                padding: 1rem;
+            }
+
+            .platform-tags {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logout Button -->
+    <button class="logout-btn hidden" id="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+        Sair
+    </button>
+    
+    <!-- Back to Main Site Button -->
+    <a href="index.html" class="back-to-main-btn" title="Voltar ao Site Principal">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="admin-container">
+        <!-- Header -->
+        <div class="admin-header">
+            <h1 class="admin-title">Admin Dashboard</h1>
+            <p class="admin-subtitle">Painel de Controle - Aimapctus Suite AI</p>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-section">
+            <form class="login-form" id="admin-login">
+                <div class="form-group">
+                    <label class="form-label" for="username">Usuário</label>
+                    <input type="text" id="username" name="username" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Senha</label>
+                    <input type="password" id="password" name="password" class="form-input" required>
+                </div>
+                <div id="login-error" class="error-message hidden">
+                    Credenciais inválidas. Tente novamente.
+                </div>
+                <button type="submit" class="btn btn-primary" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Entrar
+                </button>
+            </form>
+        </div>
+
+        <!-- Dashboard Content (Hidden initially) -->
+        <div id="dashboard-content" class="hidden">
+            <!-- Statistics -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" id="users-count">2,847</div>
+                    <div class="stat-label">Usuários Ativos</div>
+                    <div class="stat-trend">+12% este mês</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-number" id="content-count">15,932</div>
+                    <div class="stat-label">Conteúdos Criados</div>
+                    <div class="stat-trend">+245 hoje</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-number" id="revenue-count">R$ 89,247</div>
+                    <div class="stat-label">Receita Mensal</div>
+                    <div class="stat-trend">+8.5% vs mês anterior</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-number" id="growth-count">+23%</div>
+                    <div class="stat-label">Crescimento</div>
+                    <div class="stat-trend">Meta: +20%</div>
+                </div>
+            </div>
+
+            <!-- Admin Actions -->
+            <div class="admin-actions">
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3 class="action-title">Gerenciar Usuários</h3>
+                    <p class="action-description">
+                        Visualize, edite e gerencie contas de usuários e suas permissões
+                    </p>
+                    <button class="btn btn-primary btn-action" onclick="showUserManagement()">
+                        <i class="fas fa-arrow-right"></i>
+                        Acessar
+                    </button>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="action-title">Gerenciar Roteiros</h3>
+                    <p class="action-description">
+                        Configure categorias e prompts que o sistema usará para gerar roteiros com IA
+                    </p>
+                    <button class="btn btn-primary btn-action" onclick="window.location.href='roteiros.html'">
+                        <i class="fas fa-arrow-right"></i>
+                        Configurar
+                    </button>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3 class="action-title">Configurações</h3>
+                    <p class="action-description">
+                        Configure parâmetros do sistema, integrações e preferências globais
+                    </p>
+                    <button class="btn btn-primary btn-action" onclick="showSettings()">
+                        <i class="fas fa-arrow-right"></i>
+                        Configurar
+                    </button>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="action-title">Relatórios</h3>
+                    <p class="action-description">
+                        Visualize relatórios detalhados de uso, performance e métricas
+                    </p>
+                    <button class="btn btn-primary btn-action" onclick="showReports()">
+                        <i class="fas fa-arrow-right"></i>
+                        Ver Relatórios
+                    </button>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="action-title">Backup</h3>
+                    <p class="action-description">
+                        Gerencie backups automáticos e manuais do sistema
+                    </p>
+                    <button class="btn btn-primary btn-action" onclick="showNotification('Iniciando backup...', 'warning')">
+                        <i class="fas fa-arrow-right"></i>
+                        Backup
+                    </button>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="action-title">Segurança</h3>
+                    <p class="action-description">
+                        Configure políticas de segurança e monitore atividades suspeitas
+                    </p>
+                    <button class="btn btn-primary btn-action" onclick="showNotification('Acessando painel de segurança...', 'info')">
+                        <i class="fas fa-arrow-right"></i>
+                        Segurança
+                    </button>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-life-ring"></i>
+                    </div>
+                    <h3 class="action-title">Suporte</h3>
+                    <p class="action-description">
+                        Visualize tickets de suporte e gerencie atendimento aos usuários
+                    </p>
+                    <button class="btn btn-primary btn-action" onclick="showNotification('Carregando central de suporte...', 'info')">
+                        <i class="fas fa-arrow-right"></i>
+                        Suporte
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="activity-header">
+                    <h3 class="activity-title">Atividade Recente</h3>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon success">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Novo usuário registrado: maria.silva@email.com</div>
+                            <div class="activity-time">Há 15 minutos</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon info">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">1,247 novos conteúdos criados hoje</div>
+                            <div class="activity-time">Há 1 hora</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Limite de API próximo ao máximo (85%)</div>
+                            <div class="activity-time">Há 2 horas</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Backup automático concluído com sucesso</div>
+                            <div class="activity-time">Há 3 horas</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon info">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">23 novas assinaturas Pro ativadas</div>
+                            <div class="activity-time">Há 4 horas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Management Section -->
+            <div class="admin-section hidden" id="user-management">
+                <div class="section-header">
+                    <h2>Gerenciar Usuários</h2>
+                    <button class="btn btn-secondary" onclick="showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar ao Dashboard
+                    </button>
+                </div>
+                
+                <div class="users-table-container">
+                    <div class="table-controls">
+                        <input type="text" placeholder="Buscar usuários..." class="search-input" id="user-search">
+                        <select class="filter-select" id="user-filter">
+                            <option value="all">Todos os usuários</option>
+                            <option value="active">Ativos</option>
+                            <option value="inactive">Inativos</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="showAddUserModal()">
+                            <i class="fas fa-plus"></i>
+                            Novo Usuário
+                        </button>
+                    </div>
+                    
+                    <div class="users-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Plano</th>
+                                    <th>Status</th>
+                                    <th>Criado em</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- Users will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="admin-section hidden" id="settings">
+                <div class="section-header">
+                    <h2>Configurações do Sistema</h2>
+                    <button class="btn btn-secondary" onclick="showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar ao Dashboard
+                    </button>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Configurações Gerais</h3>
+                        <div class="setting-item">
+                            <label>Nome da Empresa</label>
+                            <input type="text" value="Aimapctus Suite AI" class="setting-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>Email de Contato</label>
+                            <input type="email" value="contact@aimapctus.com" class="setting-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>Modo de Manutenção</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="maintenance-mode">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Integrações</h3>
+                        <div class="setting-item">
+                            <label>Google Analytics ID</label>
+                            <input type="text" placeholder="GA-XXXXXXXXX" class="setting-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>Stripe API Key</label>
+                            <input type="password" placeholder="sk_live_..." class="setting-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>SendGrid API Key</label>
+                            <input type="password" placeholder="SG..." class="setting-input">
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Limites do Sistema</h3>
+                        <div class="setting-item">
+                            <label>Máx. conteúdos por usuário/mês</label>
+                            <input type="number" value="1000" class="setting-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>Máx. usuários por conta</label>
+                            <input type="number" value="50" class="setting-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>Backup automático</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked id="auto-backup">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-actions">
+                    <button class="btn btn-primary" onclick="saveSettings()">
+                        <i class="fas fa-save"></i>
+                        Salvar Configurações
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetSettings()">
+                        <i class="fas fa-undo"></i>
+                        Restaurar Padrões
+                    </button>
+                </div>
+            </div>
+
+            <!-- Script Management Section -->
+            <div class="admin-section hidden" id="script-management">
+                <div class="section-header">
+                    <h2>Gerenciar Roteiros IA</h2>
+                    <button class="btn btn-secondary" onclick="showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar ao Dashboard
+                    </button>
+                </div>
+                
+                <div class="script-management-container">
+                    <!-- Categories Section -->
+                    <div class="script-section">
+                        <div class="script-section-header">
+                            <h3>Categorias de Roteiros</h3>
+                            <button class="btn btn-primary" onclick="showAddCategoryModal()">
+                                <i class="fas fa-plus"></i>
+                                Nova Categoria
+                            </button>
+                        </div>
+                        
+                        <div class="categories-grid" id="categories-grid">
+                            <!-- Categories will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Prompts Section -->
+                    <div class="script-section">
+                        <div class="script-section-header">
+                            <h3>Prompts de Geração</h3>
+                            <div class="prompt-controls">
+                                <select class="filter-select" id="category-filter">
+                                    <option value="all">Todas as categorias</option>
+                                </select>
+                                <button class="btn btn-primary" onclick="showAddPromptModal()">
+                                    <i class="fas fa-plus"></i>
+                                    Novo Prompt
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="prompts-list" id="prompts-list">
+                            <!-- Prompts will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div class="admin-section hidden" id="reports">
+                <div class="section-header">
+                    <h2>Relatórios e Analytics</h2>
+                    <button class="btn btn-secondary" onclick="showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar ao Dashboard
+                    </button>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>Usuários Ativos</h3>
+                        <div class="chart-placeholder">
+                            <div class="chart-bar" style="height: 60%"></div>
+                            <div class="chart-bar" style="height: 80%"></div>
+                            <div class="chart-bar" style="height: 45%"></div>
+                            <div class="chart-bar" style="height: 90%"></div>
+                            <div class="chart-bar" style="height: 70%"></div>
+                            <div class="chart-bar" style="height: 95%"></div>
+                            <div class="chart-bar" style="height: 85%"></div>
+                        </div>
+                        <p class="chart-label">Últimos 7 dias</p>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Receita Mensal</h3>
+                        <div class="revenue-chart">
+                            <div class="revenue-item">
+                                <span>Janeiro</span>
+                                <span>R$ 76.240</span>
+                            </div>
+                            <div class="revenue-item">
+                                <span>Fevereiro</span>
+                                <span>R$ 82.150</span>
+                            </div>
+                            <div class="revenue-item">
+                                <span>Março</span>
+                                <span>R$ 89.247</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Top Recursos Utilizados</h3>
+                        <div class="feature-usage">
+                            <div class="usage-item">
+                                <span>Geração de Conteúdo</span>
+                                <div class="usage-bar">
+                                    <div class="usage-fill" style="width: 85%"></div>
+                                </div>
+                                <span>85%</span>
+                            </div>
+                            <div class="usage-item">
+                                <span>Agendamento</span>
+                                <div class="usage-bar">
+                                    <div class="usage-fill" style="width: 72%"></div>
+                                </div>
+                                <span>72%</span>
+                            </div>
+                            <div class="usage-item">
+                                <span>Analytics</span>
+                                <div class="usage-bar">
+                                    <div class="usage-fill" style="width: 68%"></div>
+                                </div>
+                                <span>68%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load configuration first
+        const configScript = document.createElement('script');
+        configScript.src = './js/config/config.js';
+        document.head.appendChild(configScript);
+        
+        // Load Supabase integration after config
+        configScript.onload = function() {
+            const supabaseScript = document.createElement('script');
+            supabaseScript.src = './js/config/supabase.js';
+            document.head.appendChild(supabaseScript);
+        };
+        
+        // Admin authentication and functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('admin-login');
+            const loginSection = document.getElementById('login-section');
+            const dashboardContent = document.getElementById('dashboard-content');
+            const loginError = document.getElementById('login-error');
+            const logoutBtn = document.getElementById('logout-btn');
+            
+            // Demo credentials (in production, use proper authentication)
+            const validCredentials = {
+                'admin': 'admin123',
+                'administrator': 'aimapctus2024',
+                'demo': 'demo',
+                'root': '123456',
+                'aimapctus': 'admin'
+            };
+            
+            // Check if already logged in
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                showDashboard();
+            }
+            
+            // Login form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const loginBtn = document.getElementById('login-btn');
+                
+                // Show loading state
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+                loginBtn.disabled = true;
+                
+                // Simulate authentication delay
+                setTimeout(() => {
+                    console.log('Tentando login com:', username, '/', password);
+                    console.log('Credenciais válidas:', validCredentials);
+                    
+                    if (validCredentials[username] && validCredentials[username] === password) {
+                        // Success
+                        console.log('Login bem-sucedido!');
+                        localStorage.setItem('adminLoggedIn', 'true');
+                        localStorage.setItem('adminUser', username);
+                        showDashboard();
+                        showNotification('Login realizado com sucesso!', 'success');
+                        initializeAdminData();
+                    } else {
+                        // Error
+                        console.log('Credenciais inválidas!');
+                        loginError.classList.remove('hidden');
+                        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar';
+                        loginBtn.disabled = false;
+                        
+                        // Clear error after 3 seconds
+                        setTimeout(() => {
+                            loginError.classList.add('hidden');
+                        }, 3000);
+                    }
+                }, 1500);
+            });
+            
+            // Logout functionality
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('adminLoggedIn');
+                localStorage.removeItem('adminUser');
+                showLogin();
+                showNotification('Logout realizado com sucesso!', 'info');
+            });
+            
+            function showDashboard() {
+                loginSection.classList.add('hidden');
+                dashboardContent.classList.remove('hidden');
+                logoutBtn.classList.remove('hidden');
+                
+                // Hide all admin sections and show main dashboard
+                hideAllAdminSections();
+                
+                // Start real-time updates
+                startRealTimeUpdates();
+            }
+            
+            function showLogin() {
+                loginSection.classList.remove('hidden');
+                dashboardContent.classList.add('hidden');
+                logoutBtn.classList.add('hidden');
+                
+                // Clear form
+                loginForm.reset();
+                loginError.classList.add('hidden');
+            }
+            
+            // Real-time updates simulation
+            function startRealTimeUpdates() {
+                setInterval(() => {
+                    updateStats();
+                }, 30000); // Update every 30 seconds
+            }
+            
+            function updateStats() {
+                // Simulate real-time stat updates
+                const usersCount = document.getElementById('users-count');
+                const contentCount = document.getElementById('content-count');
+                
+                if (usersCount) {
+                    const currentUsers = parseInt(usersCount.textContent.replace(',', ''));
+                    const newUsers = currentUsers + Math.floor(Math.random() * 5);
+                    usersCount.textContent = newUsers.toLocaleString();
+                }
+                
+                if (contentCount) {
+                    const currentContent = parseInt(contentCount.textContent.replace(',', ''));
+                    const newContent = currentContent + Math.floor(Math.random() * 20);
+                    contentCount.textContent = newContent.toLocaleString();
+                }
+            }
+            
+            function initializeAdminData() {
+                // Initialize user table
+                populateUsersTable();
+                
+                // Load analytics data
+                loadAnalyticsData();
+                
+                // Load recent activity
+                loadRecentActivity();
+                
+                // Initialize search functionality
+                const userSearch = document.getElementById('user-search');
+                if (userSearch) {
+                    userSearch.addEventListener('input', filterUsers);
+                }
+                
+                const userFilter = document.getElementById('user-filter');
+                if (userFilter) {
+                    userFilter.addEventListener('change', filterUsers);
+                }
+            }
+            
+            async function loadAnalyticsData() {
+                try {
+                    if (window.supabaseClient && window.supabaseClient.isInitialized) {
+                        const result = await window.supabaseClient.getAnalytics();
+                        
+                        if (result.success) {
+                            // Update statistics with real data
+                            const usersCount = document.getElementById('users-count');
+                            const contentCount = document.getElementById('content-count');
+                            
+                            if (usersCount && result.data.activeUsers) {
+                                usersCount.textContent = result.data.activeUsers.toLocaleString();
+                            }
+                            
+                            if (contentCount && result.data.contactSubmissions) {
+                                // Use contact submissions as a proxy for content created
+                                const estimatedContent = result.data.contactSubmissions * 50; // Estimation
+                                contentCount.textContent = estimatedContent.toLocaleString();
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error loading analytics:', error);
+                }
+            }
+            
+            async function loadRecentActivity() {
+                try {
+                    if (window.supabaseClient && window.supabaseClient.isInitialized) {
+                        const result = await window.supabaseClient.getRecentActivity(5);
+                        
+                        if (result.success && result.data.length > 0) {
+                            updateActivityFeed(result.data);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error loading recent activity:', error);
+                }
+            }
+            
+            function updateActivityFeed(activities) {
+                const activityList = document.querySelector('.activity-list');
+                if (!activityList || !activities.length) return;
+                
+                const activityHTML = activities.map(activity => {
+                    const timeAgo = getTimeAgo(new Date(activity.created_at));
+                    const iconClass = getActivityIcon(activity.type);
+                    const iconColor = getActivityIconColor(activity.type);
+                    
+                    return `
+                        <div class="activity-item">
+                            <div class="activity-icon ${iconColor}">
+                                <i class="${iconClass}"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-text">${activity.description}</div>
+                                <div class="activity-time">${timeAgo}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                activityList.innerHTML = activityHTML;
+            }
+            
+            function getActivityIcon(type) {
+                const icons = {
+                    'user_signup': 'fas fa-user-plus',
+                    'user_status_changed': 'fas fa-user-cog',
+                    'contact_form_submission': 'fas fa-envelope',
+                    'content_created': 'fas fa-file-alt',
+                    'system_alert': 'fas fa-exclamation-triangle',
+                    'backup_completed': 'fas fa-check-circle',
+                    'subscription_activated': 'fas fa-credit-card'
+                };
+                return icons[type] || 'fas fa-info-circle';
+            }
+            
+            function getActivityIconColor(type) {
+                const colors = {
+                    'user_signup': 'success',
+                    'user_status_changed': 'info',
+                    'contact_form_submission': 'info',
+                    'content_created': 'info',
+                    'system_alert': 'warning',
+                    'backup_completed': 'success',
+                    'subscription_activated': 'success'
+                };
+                return colors[type] || 'info';
+            }
+            
+            function getTimeAgo(date) {
+                const now = new Date();
+                const diffInSeconds = Math.floor((now - date) / 1000);
+                
+                if (diffInSeconds < 60) {
+                    return 'Há poucos segundos';
+                } else if (diffInSeconds < 3600) {
+                    const minutes = Math.floor(diffInSeconds / 60);
+                    return `Há ${minutes} minuto${minutes > 1 ? 's' : ''}`;
+                } else if (diffInSeconds < 86400) {
+                    const hours = Math.floor(diffInSeconds / 3600);
+                    return `Há ${hours} hora${hours > 1 ? 's' : ''}`;
+                } else {
+                    const days = Math.floor(diffInSeconds / 86400);
+                    return `Há ${days} dia${days > 1 ? 's' : ''}`;
+                }
+            }
+        });
+        
+        // Admin section navigation functions
+        function hideAllAdminSections() {
+            const sections = document.querySelectorAll('.admin-section');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            // Show main dashboard elements
+            document.querySelector('.admin-stats').style.display = 'grid';
+            document.querySelector('.admin-actions').style.display = 'grid';
+            document.querySelector('.recent-activity').style.display = 'block';
+        }
+        
+        function showSection(sectionId) {
+            // Hide main dashboard elements
+            document.querySelector('.admin-stats').style.display = 'none';
+            document.querySelector('.admin-actions').style.display = 'none';
+            document.querySelector('.recent-activity').style.display = 'none';
+            
+            // Hide all sections first
+            hideAllAdminSections();
+            
+            // Show requested section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('hidden');
+            }
+        }
+        
+        function showDashboard() {
+            hideAllAdminSections();
+        }
+        
+        function showUserManagement() {
+            showSection('user-management');
+            showNotification('Carregando gerenciamento de usuários...', 'info');
+        }
+        
+        function showSettings() {
+            showSection('settings');
+            showNotification('Carregando configurações...', 'info');
+        }
+        
+        function showReports() {
+            showSection('reports');
+            showNotification('Carregando relatórios...', 'info');
+        }
+        
+        // User management functions
+        async function populateUsersTable() {
+            const tbody = document.getElementById('users-table-body');
+            if (!tbody) return;
+            
+            try {
+                // Try to load from Supabase first
+                if (window.supabaseClient && window.supabaseClient.isInitialized) {
+                    const result = await window.supabaseClient.getUsers();
+                    
+                    if (result.success && result.data.length > 0) {
+                        renderUsersTable(result.data);
+                        return;
+                    }
+                }
+                
+                // Fallback to sample data
+                const sampleUsers = [
+                    {
+                        id: '1',
+                        name: 'Ana Silva',
+                        email: 'ana@exemplo.com',
+                        plan: 'professional',
+                        status: 'active',
+                        created_at: '2024-01-15T00:00:00Z'
+                    },
+                    {
+                        id: '2',
+                        name: 'Carlos Santos',
+                        email: 'carlos@exemplo.com',
+                        plan: 'starter',
+                        status: 'active',
+                        created_at: '2024-02-20T00:00:00Z'
+                    },
+                    {
+                        id: '3',
+                        name: 'Maria Costa',
+                        email: 'maria@exemplo.com',
+                        plan: 'enterprise',
+                        status: 'inactive',
+                        created_at: '2024-01-10T00:00:00Z'
+                    },
+                    {
+                        id: '4',
+                        name: 'João Oliveira',
+                        email: 'joao@exemplo.com',
+                        plan: 'professional',
+                        status: 'active',
+                        created_at: '2024-03-05T00:00:00Z'
+                    }
+                ];
+                
+                renderUsersTable(sampleUsers);
+                
+            } catch (error) {
+                console.error('Error loading users:', error);
+                showNotification('Erro ao carregar usuários', 'error');
+            }
+        }
+        
+        function renderUsersTable(users) {
+            const tbody = document.getElementById('users-table-body');
+            if (!tbody) return;
+            
+            tbody.innerHTML = users.map(user => `
+                <tr data-user-id="${user.id}">
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.plan}</td>
+                    <td>
+                        <span class="user-status status-${user.status}">
+                            ${user.status === 'active' ? 'Ativo' : 'Inativo'}
+                        </span>
+                    </td>
+                    <td>${new Date(user.created_at).toLocaleDateString('pt-BR')}</td>
+                    <td>
+                        <div class="user-actions">
+                            <button class="btn btn-primary btn-small" onclick="editUser('${user.id}', '${user.email}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-secondary btn-small" onclick="toggleUserStatus('${user.id}', '${user.status}')">
+                                <i class="fas fa-${user.status === 'active' ? 'pause' : 'play'}"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function filterUsers() {
+            const searchTerm = document.getElementById('user-search').value.toLowerCase();
+            const filterValue = document.getElementById('user-filter').value;
+            const rows = document.querySelectorAll('#users-table-body tr');
+            
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                const email = row.cells[1].textContent.toLowerCase();
+                const status = row.cells[3].textContent.toLowerCase();
+                
+                const matchesSearch = name.includes(searchTerm) || email.includes(searchTerm);
+                const matchesFilter = filterValue === 'all' || 
+                    (filterValue === 'active' && status.includes('ativo')) ||
+                    (filterValue === 'inactive' && status.includes('inativo'));
+                
+                row.style.display = matchesSearch && matchesFilter ? '' : 'none';
+            });
+        }
+        
+        function editUser(userId, email) {
+            showNotification(`Editando usuário: ${email}`, 'info');
+            // In a real app, this would open an edit modal
+        }
+        
+        async function toggleUserStatus(userId, currentStatus) {
+            try {
+                showNotification('Alterando status do usuário...', 'info');
+                
+                if (window.supabaseClient && window.supabaseClient.isInitialized) {
+                    const result = await window.supabaseClient.toggleUserStatus(userId);
+                    
+                    if (result.success) {
+                        showNotification('Status alterado com sucesso!', 'success');
+                        
+                        // Update the UI immediately
+                        const row = document.querySelector(`tr[data-user-id="${userId}"]`);
+                        if (row) {
+                            const statusCell = row.querySelector('.user-status');
+                            const actionButton = row.querySelector('.user-actions .btn-secondary i');
+                            
+                            if (result.newStatus === 'active') {
+                                statusCell.textContent = 'Ativo';
+                                statusCell.className = 'user-status status-active';
+                                actionButton.className = 'fas fa-pause';
+                            } else {
+                                statusCell.textContent = 'Inativo';
+                                statusCell.className = 'user-status status-inactive';
+                                actionButton.className = 'fas fa-play';
+                            }
+                        }
+                        
+                        // Log activity
+                        await window.supabaseClient.logActivity({
+                            type: 'user_status_changed',
+                            description: `Status do usuário alterado para ${result.newStatus}`,
+                            userId: userId,
+                            metadata: { newStatus: result.newStatus }
+                        });
+                    } else {
+                        throw new Error(result.error);
+                    }
+                } else {
+                    // Fallback for local development
+                    showNotification('Supabase não configurado. Alteração simulada.', 'warning');
+                    
+                    setTimeout(() => {
+                        const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
+                        const row = document.querySelector(`tr[data-user-id="${userId}"]`);
+                        if (row) {
+                            const statusCell = row.querySelector('.user-status');
+                            const actionButton = row.querySelector('.user-actions .btn-secondary i');
+                            
+                            if (newStatus === 'active') {
+                                statusCell.textContent = 'Ativo';
+                                statusCell.className = 'user-status status-active';
+                                actionButton.className = 'fas fa-pause';
+                            } else {
+                                statusCell.textContent = 'Inativo';
+                                statusCell.className = 'user-status status-inactive';
+                                actionButton.className = 'fas fa-play';
+                            }
+                        }
+                        showNotification('Status alterado localmente!', 'success');
+                    }, 1000);
+                }
+                
+            } catch (error) {
+                console.error('Error toggling user status:', error);
+                showNotification('Erro ao alterar status do usuário', 'error');
+            }
+        }
+        
+        function showAddUserModal() {
+            showNotification('Modal de novo usuário seria aberto aqui', 'info');
+        }
+        
+        // Settings functions
+        function saveSettings() {
+            showNotification('Salvando configurações...', 'info');
+            setTimeout(() => {
+                showNotification('Configurações salvas com sucesso!', 'success');
+            }, 1500);
+        }
+        
+        function resetSettings() {
+            if (confirm('Tem certeza que deseja restaurar as configurações padrão?')) {
+                showNotification('Configurações restauradas!', 'warning');
+            }
+        }
+        
+        // Notification system (reused from main.js)
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--accent-color)' : type === 'warning' ? 'var(--warning-color)' : 'var(--primary-color)'};
+                color: white;
+                padding: 16px 20px;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow-lg);
+                z-index: 2000;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                max-width: 400px;
+            `;
+            
+            const notificationContent = notification.querySelector('.notification-content');
+            notificationContent.style.cssText = `
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            `;
+            
+            const notificationClose = notification.querySelector('.notification-close');
+            notificationClose.style.cssText = `
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                opacity: 0.7;
+                transition: opacity 0.3s ease;
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Auto remove
+            const autoRemoveTimer = setTimeout(() => {
+                removeNotification(notification);
+            }, 5000);
+            
+            // Manual close
+            notificationClose.addEventListener('click', () => {
+                clearTimeout(autoRemoveTimer);
+                removeNotification(notification);
+            });
+        }
+        
+        function removeNotification(notification) {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100%)';
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }
+
+        // Script Management Functions
+        function showScriptManagement() {
+            console.log('Abrindo gerenciamento de roteiros...');
+            console.log('🎬 Carregando interface de gerenciamento...');
+            
+            showSection('script-management');
+            
+            // Add visual feedback
+            const section = document.getElementById('script-management');
+            if (section) {
+                console.log('✅ Seção encontrada - removendo classe hidden');
+                section.classList.remove('hidden');
+                section.style.display = 'block';
+                console.log('📊 Seção visível:', !section.classList.contains('hidden'));
+            } else {
+                console.error('❌ Seção script-management não encontrada!');
+            }
+            
+            loadCategories();
+            loadPrompts();
+            showNotification('✨ Interface de Roteiros Carregada com Sucesso!', 'success');
+        }
+
+        async function loadCategories() {
+            console.log('📋 Carregando categorias...');
+            const categoriesGrid = document.getElementById('categories-grid');
+            
+            if (!categoriesGrid) {
+                console.error('❌ Elemento categories-grid não encontrado!');
+                return;
+            }
+            
+            console.log('✅ Elemento categories-grid encontrado');
+            
+            // Mock data for now - will be replaced with Supabase data
+            const categories = [
+                {
+                    id: 1,
+                    name: 'Comédia',
+                    description: 'Roteiros engraçados e descontraídos para entretenimento',
+                    color: '#f59e0b',
+                    platforms: ['tiktok', 'kwai', 'youtube'],
+                    promptCount: 8,
+                    usageCount: 156
+                },
+                {
+                    id: 2,
+                    name: 'Educacional',
+                    description: 'Conteúdos informativos e didáticos',
+                    color: '#10b981',
+                    platforms: ['youtube', 'tiktok'],
+                    promptCount: 12,
+                    usageCount: 89
+                },
+                {
+                    id: 3,
+                    name: 'Lifestyle',
+                    description: 'Dicas de estilo de vida, rotina e bem-estar',
+                    color: '#8b5cf6',
+                    platforms: ['tiktok', 'kwai'],
+                    promptCount: 6,
+                    usageCount: 234
+                }
+            ];
+            
+            categoriesGrid.innerHTML = categories.map(category => `
+                <div class="category-card">
+                    <div class="category-header">
+                        <div>
+                            <div class="category-title" style="color: ${category.color}">${category.name}</div>
+                            <div class="category-description">${category.description}</div>
+                        </div>
+                        <div class="category-actions">
+                            <button class="btn btn-icon btn-edit" onclick="editCategory(${category.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-icon btn-delete" onclick="deleteCategory(${category.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="category-stats">
+                        <div class="category-stat">
+                            <strong>${category.promptCount}</strong> prompts
+                        </div>
+                        <div class="category-stat">
+                            <strong>${category.usageCount}</strong> usos
+                        </div>
+                        <div class="category-stat">
+                            <strong>${category.platforms.length}</strong> plataformas
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            console.log(`✅ ${categories.length} categorias carregadas com sucesso!`);
+            console.log('📊 Categorias:', categories.map(c => c.name).join(', '));
+            
+            // Update category filter
+            updateCategoryFilter(categories);
+        }
+
+        function showAddCategoryModal() {
+            document.getElementById('add-category-modal').classList.add('active');
+        }
+
+        function showAddPromptModal() {
+            document.getElementById('add-prompt-modal').classList.add('active');
+            // Populate category select in prompt modal
+            populatePromptCategorySelect();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Load and display prompts
+        async function loadPrompts() {
+            const promptsList = document.getElementById('prompts-list');
+            const categoryFilter = document.getElementById('category-filter').value;
+            
+            // Mock data for now - will be replaced with Supabase data
+            const prompts = [
+                {
+                    id: 1,
+                    title: 'Roteiro Viral TikTok - Comédia',
+                    category: 'Comédia',
+                    categoryColor: '#f59e0b',
+                    content: `Você é um especialista em criação de conteúdo viral para {{platform}}. Crie um roteiro de {{duration}} segundos sobre {{topic}} que seja {{tone}}.
+
+O roteiro deve ter:
+1. Hook inicial (primeiros 3 segundos)
+2. Desenvolvimento do conteúdo
+3. Call-to-action final
+
+Público-alvo: {{audience}}
+Objetivo: {{objective}}`,
+                    duration: '15-30',
+                    complexity: 'intermediate',
+                    usageCount: 45,
+                    variables: ['platform', 'duration', 'topic', 'tone', 'audience', 'objective']
+                },
+                {
+                    id: 2,
+                    title: 'Tutorial Educativo YouTube',
+                    category: 'Educacional',
+                    categoryColor: '#10b981',
+                    content: `Crie um roteiro educativo para {{platform}} sobre {{topic}}. O vídeo deve ter {{duration}} e ser adequado para {{audience}}.
+
+Estrutura:
+1. Introdução cativante (10% do tempo)
+2. Problema/necessidade (15%)
+3. Solução passo-a-passo (60%)
+4. Resumo e próximos passos (15%)
+
+Tom: {{tone}}
+Objetivo de aprendizado: {{objective}}`,
+                    duration: '60-180',
+                    complexity: 'beginner',
+                    usageCount: 28,
+                    variables: ['platform', 'topic', 'duration', 'audience', 'tone', 'objective']
+                },
+                {
+                    id: 3,
+                    title: 'Dica de Lifestyle - Rotina Matinal',
+                    category: 'Lifestyle',
+                    categoryColor: '#8b5cf6',
+                    content: `Crie um roteiro de {{duration}} segundos para {{platform}} sobre dicas de {{topic}}. O conteúdo deve ser {{tone}} e direcionado para {{audience}}.
+
+Roteiro:
+1. Hook: Problema comum relacionado ao tema
+2. Apresentação da dica/solução
+3. Demonstração prática
+4. Benefícios esperados
+5. Call-to-action
+
+Objetivo: {{objective}}`,
+                    duration: '30-60',
+                    complexity: 'beginner',
+                    usageCount: 67,
+                    variables: ['duration', 'platform', 'topic', 'tone', 'audience', 'objective']
+                }
+            ];
+            
+            // Filter prompts by category if needed
+            const filteredPrompts = categoryFilter === 'all' ? 
+                prompts : 
+                prompts.filter(prompt => prompt.category === categoryFilter);
+            
+            promptsList.innerHTML = filteredPrompts.map(prompt => `
+                <div class="prompt-card">
+                    <div class="prompt-header">
+                        <div>
+                            <div class="prompt-title">${prompt.title}</div>
+                            <span class="prompt-category" style="background: ${prompt.categoryColor}">${prompt.category}</span>
+                        </div>
+                        <div class="category-actions">
+                            <button class="btn btn-icon btn-edit" onclick="editPrompt(${prompt.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-icon btn-delete" onclick="deletePrompt(${prompt.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="prompt-content">${prompt.content}</div>
+                    
+                    <div class="prompt-variables">
+                        <div class="prompt-variables-title">Variáveis Disponíveis</div>
+                        <div class="variables-list">
+                            ${prompt.variables.map(variable => `<span class="variable-tag">{{${variable}}}</span>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="prompt-meta">
+                        <div class="prompt-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>${prompt.duration}s</span>
+                        </div>
+                        <div class="prompt-meta-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>${prompt.complexity}</span>
+                        </div>
+                        <div class="prompt-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>${prompt.usageCount} usos</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Update category filter dropdown
+        function updateCategoryFilter(categories) {
+            const categoryFilter = document.getElementById('category-filter');
+            const promptCategorySelect = document.getElementById('prompt-category-select');
+            
+            // Update main filter
+            categoryFilter.innerHTML = '<option value="all">Todas as categorias</option>' +
+                categories.map(category => `<option value="${category.name}">${category.name}</option>`).join('');
+            
+            // Update prompt modal category select if it exists
+            if (promptCategorySelect) {
+                promptCategorySelect.innerHTML = '<option value="">Selecione uma categoria</option>' +
+                    categories.map(category => `<option value="${category.name}">${category.name}</option>`).join('');
+            }
+            
+            // Add event listener for filter changes
+            categoryFilter.addEventListener('change', () => {
+                loadPrompts();
+            });
+        }
+        
+        function populatePromptCategorySelect() {
+            // Get categories from the current data
+            const categories = [
+                { name: 'Comédia' },
+                { name: 'Educacional' },
+                { name: 'Lifestyle' }
+            ];
+            
+            const promptCategorySelect = document.getElementById('prompt-category-select');
+            if (promptCategorySelect) {
+                promptCategorySelect.innerHTML = '<option value="">Selecione uma categoria</option>' +
+                    categories.map(category => `<option value="${category.name}">${category.name}</option>`).join('');
+            }
+        }
+        
+        // Form submission handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Category form submission
+            const categoryForm = document.getElementById('add-category-form');
+            if (categoryForm) {
+                categoryForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(categoryForm);
+                    const categoryData = {
+                        name: formData.get('name'),
+                        description: formData.get('description'),
+                        color: formData.get('color'),
+                        platforms: Array.from(formData.getAll('platforms')),
+                        status: formData.get('status')
+                    };
+                    
+                    try {
+                        // Here you would save to Supabase
+                        console.log('Creating category:', categoryData);
+                        
+                        showNotification('Categoria criada com sucesso!', 'success');
+                        closeModal('add-category-modal');
+                        categoryForm.reset();
+                        
+                        // Reload categories
+                        loadCategories();
+                    } catch (error) {
+                        console.error('Error creating category:', error);
+                        showNotification('Erro ao criar categoria: ' + error.message, 'error');
+                    }
+                });
+            }
+            
+            // Prompt form submission
+            const promptForm = document.getElementById('add-prompt-form');
+            if (promptForm) {
+                promptForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(promptForm);
+                    const promptData = {
+                        title: formData.get('title'),
+                        category: formData.get('category'),
+                        content: formData.get('content'),
+                        duration: formData.get('duration'),
+                        complexity: formData.get('complexity')
+                    };
+                    
+                    try {
+                        // Here you would save to Supabase
+                        console.log('Creating prompt:', promptData);
+                        
+                        showNotification('Prompt criado com sucesso!', 'success');
+                        closeModal('add-prompt-modal');
+                        promptForm.reset();
+                        
+                        // Reload prompts
+                        loadPrompts();
+                    } catch (error) {
+                        console.error('Error creating prompt:', error);
+                        showNotification('Erro ao criar prompt: ' + error.message, 'error');
+                    }
+                });
+            }
+        });
+        
+        // CRUD operations for categories
+        function editCategory(categoryId) {
+            showNotification('Funcionalidade de edição será implementada em breve', 'info');
+            console.log('Editing category:', categoryId);
+        }
+        
+        function deleteCategory(categoryId) {
+            if (confirm('Tem certeza que deseja excluir esta categoria? Esta ação não pode ser desfeita.')) {
+                try {
+                    // Here you would delete from Supabase
+                    console.log('Deleting category:', categoryId);
+                    
+                    showNotification('Categoria excluída com sucesso!', 'success');
+                    loadCategories();
+                } catch (error) {
+                    console.error('Error deleting category:', error);
+                    showNotification('Erro ao excluir categoria: ' + error.message, 'error');
+                }
+            }
+        }
+        
+        // CRUD operations for prompts
+        function editPrompt(promptId) {
+            showNotification('Funcionalidade de edição será implementada em breve', 'info');
+            console.log('Editing prompt:', promptId);
+        }
+        
+        function deletePrompt(promptId) {
+            if (confirm('Tem certeza que deseja excluir este prompt? Esta ação não pode ser desfeita.')) {
+                try {
+                    // Here you would delete from Supabase
+                    console.log('Deleting prompt:', promptId);
+                    
+                    showNotification('Prompt excluído com sucesso!', 'success');
+                    loadPrompts();
+                } catch (error) {
+                    console.error('Error deleting prompt:', error);
+                    showNotification('Erro ao excluir prompt: ' + error.message, 'error');
+                }
+            }
+        }
+    </script>
+
+    <!-- Modals -->
+    <!-- Add Category Modal -->
+    <div class="modal" id="add-category-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Nova Categoria de Roteiro</h3>
+                <button class="modal-close" onclick="closeModal('add-category-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="add-category-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Nome da Categoria</label>
+                        <input type="text" class="form-input" name="name" required placeholder="Ex: Comédia">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cor (Hex)</label>
+                        <input type="color" class="form-input" name="color" value="#6366f1">
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Descrição</label>
+                        <textarea class="form-input" name="description" rows="3" placeholder="Descreva o tipo de conteúdo desta categoria..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Plataformas</label>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
+                                <input type="checkbox" name="platforms" value="tiktok" checked>
+                                TikTok
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
+                                <input type="checkbox" name="platforms" value="kwai" checked>
+                                Kwai
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary);">
+                                <input type="checkbox" name="platforms" value="youtube" checked>
+                                YouTube
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Plataformas</label>
+                        <div class="platform-tags">
+                            <div class="platform-tag">
+                                <input type="checkbox" id="platform-tiktok" name="platforms" value="tiktok">
+                                <label for="platform-tiktok">TikTok</label>
+                            </div>
+                            <div class="platform-tag">
+                                <input type="checkbox" id="platform-kwai" name="platforms" value="kwai">
+                                <label for="platform-kwai">Kwai</label>
+                            </div>
+                            <div class="platform-tag">
+                                <input type="checkbox" id="platform-youtube" name="platforms" value="youtube">
+                                <label for="platform-youtube">YouTube</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-input" name="status">
+                            <option value="active">Ativa</option>
+                            <option value="inactive">Inativa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('add-category-modal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Criar Categoria</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Prompt Modal -->
+    <div class="modal" id="add-prompt-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Novo Prompt de Geração</h3>
+                <button class="modal-close" onclick="closeModal('add-prompt-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="add-prompt-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Título do Prompt</label>
+                        <input type="text" class="form-input" name="title" required placeholder="Ex: Roteiro de Comédia TikTok">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-input" name="category" id="prompt-category-select" required>
+                            <option value="">Selecione uma categoria</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Conteúdo do Prompt</label>
+                        <textarea class="form-textarea" name="content" required placeholder="Você é um especialista em criação de conteúdo viral para {{platform}}. Crie um roteiro de {{duration}} segundos sobre {{topic}} que seja {{tone}}. O roteiro deve ter:
+
+1. Hook inicial (primeiros 3 segundos)
+2. Desenvolvimento do conteúdo
+3. Call-to-action final
+
+Público-alvo: {{audience}}
+Objetivo: {{objective}}"></textarea>
+                        <div class="form-help">
+                            Variáveis disponíveis: {{platform}}, {{duration}}, {{topic}}, {{tone}}, {{audience}}, {{objective}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Duração Recomendada</label>
+                        <select class="form-input" name="duration">
+                            <option value="15-30">15-30 segundos</option>
+                            <option value="30-60">30-60 segundos</option>
+                            <option value="60-180">1-3 minutos</option>
+                            <option value="any">Qualquer duração</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nível de Complexidade</label>
+                        <select class="form-input" name="complexity">
+                            <option value="beginner">Iniciante</option>
+                            <option value="intermediate">Intermediário</option>
+                            <option value="advanced">Avançado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('add-prompt-modal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Criar Prompt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# Netlify Redirects File
+# https://docs.netlify.com/routing/redirects/
+
+# Redirect para HTTPS
+http://aimapctus-suite-ai.netlify.app/* https://aimapctus-suite-ai.netlify.app/:splat 301!
+
+# Redirect para domínio customizado (quando configurar)
+# http://seudominio.com/* https://seudominio.com/:splat 301!
+
+# Fallback para SPA (se necessário no futuro)
+# /* /index.html 200
+
+# Admin pages - sem cache
+/admin.html /admin.html 200
+/roteiros.html /roteiros.html 200
+
+# Assets com cache longo
+/css/* /css/:splat 200
+/js/* /js/:splat 200
+/assets/* /assets/:splat 200

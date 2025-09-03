@@ -1,0 +1,39 @@
+{
+  "name": "aimapctus-suite-ai",
+  "version": "1.0.0",
+  "description": "SaaS Suite AI para criadores de conteúdo TikTok, Kwai e YouTube",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8888",
+    "preview": "python -m http.server 8080",
+    "deploy": "netlify deploy --prod",
+    "build": "echo 'Site estático - sem build necessário'"
+  },
+  "keywords": [
+    "AI",
+    "SaaS",
+    "content-creator",
+    "tiktok",
+    "kwai",
+    "youtube",
+    "video-generator",
+    "social-media"
+  ],
+  "author": "Aimapctus",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aimapctus/aimapctus-suite-ai.git"
+  },
+  "homepage": "https://aimapctus-suite-ai.netlify.app",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

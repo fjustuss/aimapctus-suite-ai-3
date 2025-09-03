@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Aimapctus Suite AI</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- Header/Navigation -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="./index.html" class="dashboard-logo">
+                    <img src="./assets/logo.svg" alt="Aimapctus" class="logo">
+                    <span class="logo-text">Aimapctus</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="#dashboard" class="nav-link active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#videos" class="nav-link">
+                        <i class="fas fa-video"></i>
+                        <span>Vídeos</span>
+                    </a>
+                    <a href="#analytics" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="#trends" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        <span>Trends</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="user-menu">
+                    <button class="notifications-btn" id="notifications-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="user-profile" id="user-profile">
+                        <img src="./assets/default-avatar.svg" alt="Profile" class="profile-image">
+                        <span class="user-name" id="user-name">Usuário</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="profile-dropdown" id="profile-dropdown">
+                        <a href="#profile" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>Meu Perfil</span>
+                        </a>
+                        <a href="#settings" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Configurações</span>
+                        </a>
+                        <a href="#billing" class="dropdown-item">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Plano & Cobrança</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#logout" class="dropdown-item" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sair</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <h1 class="welcome-title">Bem-vindo ao Aimapctus! 🚀</h1>
+                <p class="welcome-subtitle">Transforme suas ideias em conteúdo viral com o poder da IA</p>
+                
+                <!-- Email Confirmation Alert -->
+                <div class="email-confirmation-alert" id="email-confirmation-alert" style="display: none;">
+                    <div class="alert-content">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="alert-text">
+                            <strong>Confirme seu email</strong>
+                            <p>Verifique sua caixa de entrada e clique no link de confirmação para acessar todas as funcionalidades.</p>
+                        </div>
+                        <button class="btn btn-outline btn-sm" id="resend-confirmation">
+                            <i class="fas fa-redo"></i>
+                            Reenviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Cards -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="total-videos">0</h3>
+                        <p class="stat-label">Vídeos Criados</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="total-views">0</h3>
+                        <p class="stat-label">Visualizações</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="total-likes">0</h3>
+                        <p class="stat-label">Curtidas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-share"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="total-shares">0</h3>
+                        <p class="stat-label">Compartilhamentos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions-section">
+            <h2 class="section-title">Ações Rápidas</h2>
+            <div class="actions-grid">
+                <div class="action-card" id="create-video">
+                    <div class="action-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Criar Vídeo</h3>
+                    <p>Use IA para gerar vídeos virais automaticamente</p>
+                    <span class="action-badge">Popular</span>
+                </div>
+                <div class="action-card" id="create-thumbnail">
+                    <div class="action-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Gerar Thumbnail</h3>
+                    <p>Crie thumbnails atrativas com IA</p>
+                </div>
+                <div class="action-card" id="get-hashtags">
+                    <div class="action-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3>Hashtags Trending</h3>
+                    <p>Descubra hashtags em alta no seu nicho</p>
+                </div>
+                <div class="action-card" id="analyze-trends">
+                    <div class="action-icon">
+                        <i class="fas fa-trending-up"></i>
+                    </div>
+                    <h3>Análise de Trends</h3>
+                    <p>Veja o que está bombando agora</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="activity-section">
+            <h2 class="section-title">Atividade Recente</h2>
+            <div class="activity-container">
+                <div class="activity-empty" id="activity-empty">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Comece sua jornada!</h3>
+                    <p>Crie seu primeiro vídeo usando nossas ferramentas de IA</p>
+                    <button class="btn btn-primary" id="start-creating">
+                        <i class="fas fa-play"></i>
+                        Começar a Criar
+                    </button>
+                </div>
+                <div class="activity-list" id="activity-list" style="display: none;">
+                    <!-- Activity items will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Status -->
+        <section class="platforms-section">
+            <h2 class="section-title">Suas Plataformas</h2>
+            <div class="platforms-grid">
+                <div class="platform-card tiktok" id="platform-tiktok">
+                    <div class="platform-header">
+                        <i class="fab fa-tiktok"></i>
+                        <h3>TikTok</h3>
+                        <span class="status-badge disconnected">Desconectado</span>
+                    </div>
+                    <p>Conecte sua conta do TikTok para publicar automaticamente</p>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-link"></i>
+                        Conectar Conta
+                    </button>
+                </div>
+                <div class="platform-card kwai" id="platform-kwai">
+                    <div class="platform-header">
+                        <i class="fas fa-video"></i>
+                        <h3>Kwai</h3>
+                        <span class="status-badge disconnected">Desconectado</span>
+                    </div>
+                    <p>Conecte sua conta do Kwai para amplificar seu alcance</p>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-link"></i>
+                        Conectar Conta
+                    </button>
+                </div>
+                <div class="platform-card youtube" id="platform-youtube">
+                    <div class="platform-header">
+                        <i class="fab fa-youtube"></i>
+                        <h3>YouTube</h3>
+                        <span class="status-badge disconnected">Desconectado</span>
+                    </div>
+                    <p>Conecte sua conta do YouTube para Shorts automáticos</p>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-link"></i>
+                        Conectar Conta
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Aimapctus Suite AI. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="#help">Ajuda</a>
+                <a href="#privacy">Privacidade</a>
+                <a href="#terms">Termos</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/config/config.js"></script>
+    <script src="./js/config/supabase.js"></script>
+    <script src="./js/dashboard.js"></script>
+</body>
+</html>
